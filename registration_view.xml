@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+		<menuitem name="eBaySendProduct" id="ebaypasoapaso" sequence="90"/>
+		<menuitem name="eBAY Menu" id="ebaypasoapaso_menupropio" parent="ebaypasoapaso"/>
+		<!-- Definition of Sign In -->
+		<record model="ir.ui.view" id="registration_sign_objeto_tree">
+			<field name="name">registration_sign.objeto.tree</field>
+			<field name="model">registration_sign.objeto</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="objeto">
+					<field name="user_id"/>
+					<field name="id_session"/>
+					<field name="sign_url"/>					
+				</tree>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="registration_sign_objeto_view">
+			<field name="name">Authentication</field>
+            <field name="model">registration_sign.objeto</field>
+            <field name="arch" type="xml">
+            	<form string="User Authentication">	
+            		<sheet>	
+            		    
+            			
+
+            			<group attrs="{'invisible': [('actual_state', '=', 'inside')]}">		
+                    		<field name="actual_state" invisible="1" />
+                    		<field name="user_id"/>
+                    		<p>
+                    			Introduce your User ID and Click GetSession to Authorize yourself
+                    		</p>
+                    		
+		    				<footer >
+								<button name="session_id" string="GetSession" type="object" />
+		    				</footer>
+		    				
+		    			</group>
+		    			<group attrs="{'invisible': [('actual_state', '=', 'confirm')]}">
+		    				<field name="sign_url" widget='url'/>
+		    				<p> 
+			    				After successful login in the url upside, click  button to complete the process
+			    				<br/>
+			    			</p>
+		    				<footer >
+								<button name="get_token" string="COMPLETE THE PROCESS" type="object" class="oe_inline"/>
+								<p> </p>
+			    			</footer>
+		    			</group>
+		    		
+		    		</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="registration_sign_objeto_action" model="ir.actions.act_window">
+			<field name="name">Sign In</field>
+			<field name="res_model">registration_sign.objeto</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem action="registration_sign_objeto_action" id="registration_sign_objeto_menu" sequence="1" parent="ebaypasoapaso_menupropio"/>
+		
+		<record id="join_authorize" model="ir.actions.act_window">
+            <field name="type">ir.actions.act_window</field>
+            <field name="name">New eBay User Authentication</field>
+            <field name="res_model">registration.objeto</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            
+        </record>
+		
+		
+		<!-- Definition of Join -->
+		
+		
+		<record model="ir.ui.view" id="registration_objeto_tree">
+			<field name="name">registration.objeto.tree</field>
+			<field name="model">registration.objeto</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="objeto">
+					<field name="user_id"/>
+					<field name="appid"/>
+					<field name="compatibility"/>
+					<field name="sandbox"/>										
+				</tree>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="registration_objeto_form">
+			<field name="name">registration.objeto.form</field>
+			<field name="model">registration.objeto</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="objeto">
+					
+					<sheet>
+						<group>				
+							<group>		
+									                      
+                        		<field name="email" />
+								<field name="user_id"/>
+								<field name="site"/>
+                            	<field name="appid"/>
+							</group>
+							<group>
+								<field name="devid"/>
+								<field name="certid"/>
+								
+								<field name="ru_name"/>
+								<field name="compatibility"/>
+								<field name="sandbox"/>
+								<footer>
+                        			<button name="save" string="Save" type="object" class="oe_right"/>
+                        		</footer> 
+							</group>  
+							                     							                        
+                        </group>
+                        
+					</sheet>
+														
+				</form>
+			</field>
+		</record>
+
+		<record id="registration_objeto_action" model="ir.actions.act_window">
+			<field name="name">Join</field>
+			<field name="res_model">registration.objeto</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem action="registration_objeto_action" id="registration_objeto_menu" sequence="1" parent="ebaypasoapaso_menupropio"/>
+
+    </data>
+</openerp>
