@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+		<record model="ir.ui.view" id="add_article_objeto_tree">
+			<field name="name">add_article.objeto.tree</field>
+			<field name="model">add_article.objeto</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="objeto">
+					<field name="title" />
+					<field name="item_id" />
+					<field name="url_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="add_article_objeto_form">
+			<field name="name">add_article.objeto.form</field>
+			<field name="model">add_article.objeto</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="objeto">
+								
+					<sheet>                 						
+						<group>
+						
+							<group>
+								<field name="product_id"/>
+    							<field name="imagen" widget='image' options='{"size": [150, 140]}' />
+    							
+								<field name="title"/>							                                              	
+                           		<field name="country"/>
+								<field name="site"/>
+								<field name="currency"/>
+								<field name="start_date"/>	
+								<field name="tinypic" widget="url"/>						
+								<field name="pictureDetails"/>
+								<field name="listingDuration"/>
+								<field name="actual_state" invisible="1" />
+								<field name="item_id" attrs="{'invisible': [('actual_state', '=',False)]}"/>
+								<field name="url_id" widget='url' attrs="{'invisible': [('actual_state', '=',False)]}"/>
+							</group>
+							<group>
+								<field name="category"/>
+								<field name="enl_cat" widget="url"/>
+								<field name="send_category"/>
+								<field name="postalCode"/>
+								<field name="startPrice"/>
+								<field name="paymentMethods"/>
+								<field name="conditionID"/>
+								<field name="shippingservice"/>
+								<field name="shippingServiceCost"/>
+								<field name="return_accepted"/>
+								<field name="whitin" attrs="{'invisible': [('return_accepted', '=','ReturnsNotAccepted')]}"/>
+								<field name="who_pay" attrs="{'invisible': [('return_accepted', '=','ReturnsNotAccepted')]}"/>
+								<field name="description_article"/>
+							</group>
+                        </group>
+                        <field name="foot" invisible="1" />
+						<footer attrs="{'invisible': [('foot', '=','env')]}">
+							
+							<button name="verify_update_product" string="SEND to eBay" type="object" class="oe_highlight" />
+							
+								or
+					
+							<button string="Discard" class="oe_link" special="cancel" />
+		    			</footer>
+		    			<footer attrs="{'invisible': [('foot', '=','ini')]}" >
+		    				
+		    					If you are not using a sandbox account, this update will have a cost of <field name="cost" />
+		    				
+		    				<button name="update_product" string="UPDATE to eBay" type="object" class="oe_highlight" />
+		
+								or
+							
+							<button string="Cancel" class="oe_link" special="cancel"  />
+		    			</footer>
+					</sheet>										
+				</form>
+			</field>
+		</record>
+		<record id="up_product" model="ir.actions.act_window">
+            <field name="type">ir.actions.act_window</field>
+            <field name="name" >Send Product</field>
+            <field name="res_model">add_article.objeto</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            
+        </record>
+		<record id="add_article_objeto_action" model="ir.actions.act_window"  >
+			<field name="name">Add Product</field>
+			<field name="res_model">add_article.objeto</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem action="add_article_objeto_action" id="add_article_objeto_menu" sequence="1"   parent="ebaypasoapaso_menupropio"/>
+
+    </data>
+</openerp>
